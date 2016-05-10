@@ -8,11 +8,11 @@ Convert and replace image-files within your DOM/HTML to base64-encoded data.
 
 ```js
 var gulp = require('gulp');
-var img64 = require('gulp-img64');
+var img64 = require('gulp-cimg64');
 
 gulp.task('default', function () {
 	gulp.src('index.html')
-		.pipe(img64())
+		.pipe(img64({fileBase:''}))
 		.pipe(gulp.dest('path'));
 });
 ```

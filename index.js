@@ -38,7 +38,7 @@ module.exports = function(opt) {
 								var simg64 = new Buffer(sfile).toString('base64');
 								this.attr('src', 'data:' + mtype + ';base64,' + simg64);
 							}catch (e){
-								console.log("cann't find img" + spath);
+								console.log(fileBase + "cann't find img " + ssrc);
 							}
 						}
 					}
