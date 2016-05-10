@@ -12,7 +12,7 @@ var img64 = require('gulp-cimg64');
 
 gulp.task('default', function () {
 	gulp.src('index.html')
-		.pipe(img64({fileBase:''}))
+		.pipe(img64({fileBase:'./src/img/}))
 		.pipe(gulp.dest('path'));
 });
 ```
