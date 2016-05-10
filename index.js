@@ -6,8 +6,8 @@ var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
 
-module.exports = function() {
-
+module.exports = function(opt) {
+	opt = opt || {};
 	// create a stream through which each file will pass
 	return through.obj(function(file, enc, callback) {
 
@@ -29,13 +29,17 @@ module.exports = function() {
 					var ssrc = this.attr('src');
 					var isdata = ssrc.indexOf("data");
 					if (ssrc != "" && typeof ssrc != 'undefined' && isdata !== 0) {
-						var spath = path.join(file.base, ssrc);
+						var fileBase = opt.fileBase || file.base;
+						var spath = path.join(fileBase, ssrc);
 						var mtype = mime.lookup(spath);
 						if (mtype != 'application/octet-stream') {
-							console.log(mtype);
-							var sfile = fs.readFileSync(spath);
-							var simg64 = new Buffer(sfile).toString('base64');
-							this.attr('src', 'data:' + mtype + ';base64,' + simg64);
+							try{
+								var sfile = fs.readFileSync(spath);
+								var simg64 = new Buffer(sfile).toString('base64');
+								this.attr('src', 'data:' + mtype + ';base64,' + simg64);
+							}catch (e){
+								console.log("cann't find img" + spath);
+							}
 						}
 					}
 				}
