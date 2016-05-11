@@ -28,7 +28,8 @@ module.exports = function(opt) {
 				if (this.attr('src')) {
 					var ssrc = this.attr('src');
 					var isdata = ssrc.indexOf("data");
-					if (ssrc != "" && typeof ssrc != 'undefined' && isdata !== 0) {
+					var http = ssrc.indexOf("http");
+					if (ssrc != "" && typeof ssrc != 'undefined' && isdata !== 0 &&  && http !== 0) {
 						var fileBase = opt.fileBase || file.base;
 						var spath = path.join(fileBase, ssrc);
 						var mtype = mime.lookup(spath);
